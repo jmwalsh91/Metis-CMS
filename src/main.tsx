@@ -1,8 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import 'styles/index.css'
+import './index.css'
+import AuthRequired from './services/AuthRequired'
 
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <AuthRequired>
+      <App />
+    </AuthRequired>
+  </React.StrictMode>
+)
+
+
+postMessage({ payload: 'removeLoading' }, '*')
 /**
  * If you enables use of Node.js API in the Renderer-process
  * ```
@@ -11,11 +22,3 @@ import 'styles/index.css'
  * @see - https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#electron-renderervite-serve
  */
 // import './samples/node-api'
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-)
-
-postMessage({ payload: 'removeLoading' }, '*')

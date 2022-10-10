@@ -1,72 +1,58 @@
-import { useState } from 'react'
-import electron from '/electron.png'
-import react from '/react.svg'
-import vite from '/vite.svg'
-import styles from 'styles/app.module.scss'
+import { useContext, useState } from "react";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import reactLogo from "./assets/react.svg";
+import "./App.css";
+import Shell from "./components/Shell";
+import { Button, Header, MantineProvider, Paper } from "@mantine/core";
+import { theme } from "./styles/theme";
+import Home from "./pages/Home";
+import Compose from "./pages/Compose";
+import Dashboard from "./pages/Dashboard";
+import View from "./pages/View";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { prefetch, queryClient } from "./services/queryClient";
+import { AuthPage } from "./pages/AuthPage";
+import AuthRequired, { AuthContext } from "./services/AuthRequired";
+import ComposeTarget from "./components/ComposeTarget";
+import NewBlogpost from "./components/targets/NewBlogpost";
+import NewProject from "./pages/NewProject";
+import NewNote from "./components/targets/NewNote";
+import ComposeNew from "./components/targets/ComposeNew";
+import ViewPost from "./components/view/ViewPost";
 
-const App: React.FC = () => {
-  const [count, setCount] = useState(0)
+function App() {
+  const authUser = useContext(AuthContext);
+  /*  const prefetchedPosts = prefetch.prefetchPosts() */
 
   return (
-    <div className={styles.app}>
-      <header className={styles.appHeader}>
-        <div className={styles.logos}>
-          <div className={styles.imgBox}>
-            <img
-              src={electron}
-              style={{ height: '24vw' }}
-              className={styles.appLogo}
-              alt="electron"
-            />
-          </div>
-          <div className={styles.imgBox}>
-            <img src={vite} style={{ height: '19vw' }} alt="vite" />
-          </div>
-          <div className={styles.imgBox}>
-            <img
-              src={react}
-              style={{ maxWidth: '100%' }}
-              className={styles.appLogo}
-              alt="logo"
-            />
-          </div>
-        </div>
-        <p>Hello Electron + Vite + React!</p>
-        <p>
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <div>
-          <a
-            className={styles.appLink}
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className={styles.appLink}
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-          <div className={styles.staticPublic}>
-            Place static files into the{' '}
-            <code>/public</code> folder
-            <img style={{ width: 77 }} src="./node.png" />
-          </div>
-        </div>
-      </header>
-    </div>
-  )
+    <QueryClientProvider client={queryClient}>
+      <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
+        <BrowserRouter>
+          {authUser.session ? (
+            <Shell>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/auth" element={<AuthPage />} />
+                <Route path="/compose" element={<ComposeTarget />} />
+                <Route path="compose/new" element={<ComposeNew />}>
+                  <Route path="blogpost/" element={<NewBlogpost />} />
+                  <Route path="project/" element={<NewProject />} />
+                  <Route path="note/" element={<NewNote />} />
+                </Route>
+                <Route path="/dash" element={<Dashboard />} />
+                <Route path="/view" element={<View />}/>
+              </Routes>
+              <Outlet />
+            </Shell>
+          ) : (
+            <Shell>
+              <AuthPage />
+            </Shell>
+          )}
+        </BrowserRouter>
+      </MantineProvider>
+    </QueryClientProvider>
+  );
 }
 
-export default App
+export default App;
