@@ -1,14 +1,17 @@
+import { QueryFunctionContext } from "@tanstack/react-query";
+import { queryClient } from "./queryClient";
+
 export interface Metrics {
-  page_views: {
+  visitors: {
     value: number;
   };
-  unique_visitors: {
-    value: number;
-  };
-  page_views_per_visitor: {
+  pageviews: {
     value: number;
   };
   bounce_rate: {
+    value: number;
+  };
+  visit_duration: {
     value: number;
   };
 }
@@ -16,7 +19,7 @@ export interface MetricsResponse extends Response {
   results: Metrics;
 }
 
-export async function getMetrics(period: string) {
+export async function getMetrics(period: string): Promise<Metrics> {
   const response = await fetch(
     `https://plausible.io/api/v1/stats/aggregate?site_id=${
       import.meta.env.VITE_SITE_1
@@ -32,8 +35,8 @@ export async function getMetrics(period: string) {
       return data.results;
     })
     .catch((error) => {
-      console.error("Error:", error);
+      throw new Error(error);
     });
-    console.log(response)
-  return response;
+  console.log(response);
+  return response && response;
 }

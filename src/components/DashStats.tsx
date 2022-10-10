@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStyles, Text } from '@mantine/core';
+import { Metrics } from '@/services/analytics';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -58,17 +59,33 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface StatsGroupProps {
-  data: { title: string; stats: string; description: string }[];
+  data: Metrics
 }
 
 export function DashStats({ data }: StatsGroupProps) {
   const { classes } = useStyles();
-  const stats = data.map((stat) => (
-    <div key={stat.title} className={classes.stat}>
-      <Text className={classes.count}>{stat.stats}</Text>
-      <Text className={classes.title}>{stat.title}</Text>
-      <Text className={classes.description}>{stat.description}</Text>
+  return (
+    <div className={classes.root}>
+    <div key="bounce" className={classes.stat}>
+      <Text className={classes.count}>{data.bounce_rate.value}</Text>
+      <Text className={classes.title}>Bounce</Text>
+  
     </div>
-  ));
-  return <div className={classes.root}>{stats}</div>;
+       <div key="pageviews" className={classes.stat}>
+       <Text className={classes.count}>{data.pageviews.value}</Text>
+       <Text className={classes.title}>Page Views.</Text>
+{/*        <Text className={classes.description}>{stat.description}</Text> */}
+     </div>
+        <div key="duration" className={classes.stat}>
+        <Text className={classes.count}>{data.visit_duration.value}</Text>
+        <Text className={classes.title}>Duration</Text>
+        <Text className={classes.description}>Average Duration</Text>
+      </div>
+         <div key="visitors" className={classes.stat}>
+         <Text className={classes.count}>{data.visitors.value}</Text>
+         <Text className={classes.title}>Visitors</Text>
+{/*          <Text className={classes.description}></Text> */}
+       </div>
+    </div>
+)
 }
