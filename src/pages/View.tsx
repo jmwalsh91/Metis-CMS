@@ -17,7 +17,7 @@ function View() {
     postId === 0 ? null : null
   }
   return (
-    <ScrollArea style={{ height: "80vh" }}>
+    <ScrollArea style={{ height: "90vh" }}>
       <Grid>
         {data &&
           data.map((post) => {

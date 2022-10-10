@@ -19,6 +19,7 @@ import NewProject from "./pages/NewProject";
 import NewNote from "./components/targets/NewNote";
 import ComposeNew from "./components/targets/ComposeNew";
 import ViewPost from "./components/view/ViewPost";
+import { HashRouter } from "react-router-dom";
 
 function App() {
   const authUser = useContext(AuthContext);
@@ -27,7 +28,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
-        <BrowserRouter>
+        <HashRouter>
           {authUser.session ? (
             <Shell>
               <Routes>
@@ -39,8 +40,8 @@ function App() {
                   <Route path="project/" element={<NewProject />} />
                   <Route path="note/" element={<NewNote />} />
                 </Route>
-                <Route path="/dash" element={<Dashboard />} />
-                <Route path="/view" element={<View />}/>
+                <Route path="dash" element={<Dashboard />} />
+                <Route path="view" element={<View />}/>
               </Routes>
               <Outlet />
             </Shell>
@@ -49,7 +50,7 @@ function App() {
               <AuthPage />
             </Shell>
           )}
-        </BrowserRouter>
+        </HashRouter>
       </MantineProvider>
     </QueryClientProvider>
   );
