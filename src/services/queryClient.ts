@@ -4,7 +4,13 @@ import { sb } from "./sb";
 /**
  * New instance of QueryClient for QueryProvider
  */
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            suspense: true,
+        },
+    },
+});
 
 /**
  * Prefetch object with methods to prefetch data from Supabase

@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 
 function View() {
   const [viewId, setViewId] = useState<number>(0);
-  const { data, status } = useQuery(["prefetchPosts"], sb.getAllPosts);
+  const { data } = useQuery(["prefetchPosts"], sb.getAllPosts);
 
   function handleView(postId: number){
     setViewId(postId)

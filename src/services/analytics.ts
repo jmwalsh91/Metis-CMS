@@ -26,12 +26,13 @@ export async function getMetrics(period: string): Promise<Metrics> {
     }&period=${period}&metrics=visitors,pageviews,bounce_rate,visit_duration`,
     {
       headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_PLAUSIBLE_API_KEY}`,
+        Authorization: `Bearer ${import.meta.env.VITE_ANALYTICS_KEY}`,
       },
     }
   )
     .then((res) => res.json())
     .then((data: MetricsResponse) => {
+        console.log("data", data)
       return data.results;
     })
     .catch((error) => {

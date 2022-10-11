@@ -33,9 +33,7 @@ const statsData = [
   },
 ];
 function Dashboard({}: Props) {
-  const { data, error } = useQuery<Metrics, Error>(["metrics"], () =>
-    getMetrics("6mo")
-  );
+
   return (
     <Paper
       style={{
@@ -47,7 +45,7 @@ function Dashboard({}: Props) {
       }}
     >
       <Suspense fallback={<Loader />}>
-        {data && <DashStats data={data} />}
+        { <DashStats />}
       </Suspense>
 
       <Paper p={".5rem"}>

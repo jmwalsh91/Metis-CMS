@@ -1,6 +1,7 @@
-import React from 'react';
-import { createStyles, Text } from '@mantine/core';
-import { Metrics } from '@/services/analytics';
+import React, { Suspense } from 'react';
+import { createStyles, Loader, Text } from '@mantine/core';
+import { getMetrics, Metrics } from '@/services/analytics';
+import { useQuery } from '@tanstack/react-query';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -62,27 +63,40 @@ interface StatsGroupProps {
   data: Metrics
 }
 
-export function DashStats({ data }: StatsGroupProps) {
+export function DashStats() {
   const { classes } = useStyles();
+  const { data, error } = useQuery<Metrics, Error>(["metrics"], () =>
+    getMetrics("6mo")
+  );
   return (
     <div className={classes.root}>
     <div key="bounce" className={classes.stat}>
-      <Text className={classes.count}>{data.bounce_rate.value}</Text>
+      <Suspense fallback={<Loader />}>
+      <Text className={classes.count}>{data && data.bounce_rate.value}</Text>
       <Text className={classes.title}>Bounce</Text>
   
+    </Suspense>
     </div>
+
        <div key="pageviews" className={classes.stat}>
-       <Text className={classes.count}>{data.pageviews.value}</Text>
+       <Suspense fallback={<Loader />}>
+       <Text className={classes.count}>{data && data.pageviews.value}</Text>
+       </Suspense>
        <Text className={classes.title}>Page Views.</Text>
 {/*        <Text className={classes.description}>{stat.description}</Text> */}
      </div>
+
         <div key="duration" className={classes.stat}>
-        <Text className={classes.count}>{data.visit_duration.value}</Text>
+        <Suspense fallback={<Loader />}>
+        <Text className={classes.count}>{data && data.visit_duration.value}</Text>
+        </Suspense>
         <Text className={classes.title}>Duration</Text>
         <Text className={classes.description}>Average Duration</Text>
       </div>
          <div key="visitors" className={classes.stat}>
-         <Text className={classes.count}>{data.visitors.value}</Text>
+         <Suspense fallback={<Loader />}>
+         <Text className={classes.count}>{data && data.visitors.value}</Text>
+         </Suspense>
          <Text className={classes.title}>Visitors</Text>
 {/*          <Text className={classes.description}></Text> */}
        </div>
