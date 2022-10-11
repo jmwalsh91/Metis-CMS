@@ -1,4 +1,4 @@
-import { Grid, Modal, ScrollArea } from "@mantine/core";
+import { Grid, Loader, Modal, ScrollArea } from "@mantine/core";
 import React, { Suspense, useEffect, useState } from "react";
 import PostCard from "../components/PostCard";
 import { sb } from "../services/sb";
@@ -19,6 +19,7 @@ function View() {
   return (
     <ScrollArea style={{ height: "90vh" }}>
       <Grid>
+        <Suspense fallback={<Loader />}>
         {data &&
           data.map((post) => {
             return (
@@ -34,6 +35,7 @@ function View() {
               </Grid.Col>
             );
           })}
+        </Suspense>
       </Grid>
       <Modal
         opened={viewId !== 0}

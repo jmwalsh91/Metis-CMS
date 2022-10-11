@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { BrowserRouter, Outlet, redirect, Route, Routes, useNavigate } from "react-router-dom";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 import Shell from "./components/Shell";
@@ -23,25 +23,31 @@ import { HashRouter } from "react-router-dom";
 
 function App() {
   const authUser = useContext(AuthContext);
+  const navigate = useNavigate()
   /*  const prefetchedPosts = prefetch.prefetchPosts() */
+
+    useEffect(() => {
+      !authUser.session ? navigate("/auth") : null
+    }, [authUser.session])
+
 
   return (
     <QueryClientProvider client={queryClient}>
       <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
-        <HashRouter>
+    
           {authUser.session ? (
             <Shell>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/auth" element={<AuthPage />} />
+                <Route path="/dash" element={<Dashboard />} />
+                <Route path="/view" element={<View />}/>
                 <Route path="/compose" element={<ComposeTarget />} />
                 <Route path="compose/new" element={<ComposeNew />}>
                   <Route path="blogpost/" element={<NewBlogpost />} />
                   <Route path="project/" element={<NewProject />} />
                   <Route path="note/" element={<NewNote />} />
                 </Route>
-                <Route path="dash" element={<Dashboard />} />
-                <Route path="view" element={<View />}/>
               </Routes>
               <Outlet />
             </Shell>
@@ -50,7 +56,7 @@ function App() {
               <AuthPage />
             </Shell>
           )}
-        </HashRouter>
+   
       </MantineProvider>
     </QueryClientProvider>
   );

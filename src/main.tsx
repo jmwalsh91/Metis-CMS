@@ -1,19 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
-import AuthRequired from './services/AuthRequired'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { HashRouter } from "react-router-dom";
+import App from "./App";
+import "./index.css";
+import AuthRequired from "./services/AuthRequired";
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <AuthRequired>
-      <App />
-    </AuthRequired>
+    <HashRouter>
+      <AuthRequired>
+        <App />
+      </AuthRequired>
+    </HashRouter>
   </React.StrictMode>
-)
+);
 
-
-postMessage({ payload: 'removeLoading' }, '*')
+postMessage({ payload: "removeLoading" }, "*");
 /**
  * If you enables use of Node.js API in the Renderer-process
  * ```
