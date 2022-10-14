@@ -1,15 +1,18 @@
+import { getMetrics, Metrics } from "@/services/analytics";
 import {
   Button,
   Card,
   CardSection,
   Grid,
   Header,
+  Loader,
   Paper,
   Text,
   Title,
 } from "@mantine/core";
-import React from "react";
-import { DashStats } from "../components/DashStats";
+import { useQuery } from "@tanstack/react-query";
+import React, { Suspense } from "react";
+import { DashStats } from "../components/analytics/DashStats";
 
 type Props = {};
 const statsData = [
@@ -30,6 +33,7 @@ const statsData = [
   },
 ];
 function Dashboard({}: Props) {
+
   return (
     <Paper
       style={{
@@ -40,7 +44,9 @@ function Dashboard({}: Props) {
         flexDirection: "column",
       }}
     >
-      <DashStats data={statsData} />
+      <Suspense fallback={<Loader />}>
+        { <DashStats />}
+      </Suspense>
 
       <Paper p={".5rem"}>
         <Text
@@ -61,7 +67,9 @@ function Dashboard({}: Props) {
           height: "20rem",
         }}
       >
-        <Title order={3} p="1rem">This is a recent Post</Title>
+        <Title order={3} p="1rem">
+          This is a recent Post
+        </Title>
         <CardSection>This is a recent post</CardSection>
         <Button>Expand</Button>
       </Card>

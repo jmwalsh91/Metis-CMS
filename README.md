@@ -1,12 +1,6 @@
-# electron-vite-react
+# BLOGcms
 
-[![awesome-vite](https://awesome.re/mentioned-badge.svg)](https://github.com/vitejs/awesome-vite)
-![GitHub stars](https://img.shields.io/github/stars/caoxiemeihao/vite-react-electron?color=fa6470)
-![GitHub issues](https://img.shields.io/github/issues/caoxiemeihao/vite-react-electron?color=d8b22d)
-![GitHub license](https://img.shields.io/github/license/caoxiemeihao/vite-react-electron)
-[![Required Node.JS >= 14.18.0 || >=16.0.0](https://img.shields.io/static/v1?label=node&message=14.18.0%20||%20%3E=16.0.0&logo=node.js&color=3f893e)](https://nodejs.org/about/releases)
 
-English | [简体中文](README.zh-CN.md)
 
 ## 👀 Overview
 
@@ -44,7 +38,7 @@ Familiar React application structure, just with `electron` folder on the top :wi
 │       ├── icon.ico              Icon for the application
 │       ├── installerIcon.ico     Icon for the application installer
 │       ├── uninstallerIcon.ico   Icon for the application uninstaller
-|       └── iconset               
+|       └── iconset               gt8y89
 |           └── 256x256.png       Icon for the application on Linux
 │
 ├── release                   Generated after production build, contains executables
