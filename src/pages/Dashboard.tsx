@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import React, { Suspense } from "react";
-import { DashStats } from "../components/DashStats";
+import { DashStats } from "../components/analytics/DashStats";
 
 type Props = {};
 const statsData = [

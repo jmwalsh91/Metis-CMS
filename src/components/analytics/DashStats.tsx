@@ -72,7 +72,7 @@ export function DashStats() {
     <div className={classes.root}>
     <div key="bounce" className={classes.stat}>
       <Suspense fallback={<Loader />}>
-      <Text className={classes.count}>{data && data.bounce_rate.value}</Text>
+      <Text className={classes.count}>{data && data.bounce_rate.value}%</Text>
       <Text className={classes.title}>Bounce</Text>
   
     </Suspense>
