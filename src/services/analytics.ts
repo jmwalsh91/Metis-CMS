@@ -19,7 +19,12 @@ export interface MetricsResponse extends Response {
   results: Metrics;
 }
 
-export async function getMetrics(siteId: string, period: string): Promise<Metrics> {
+export async function getMetrics(siteId: string | null, period: string | null): Promise<Metrics> {
+
+  if (!siteId || !period) {
+    return Promise.reject("Missing siteId or period");
+  }
+
   const response = await fetch(
     `https://plausible.io/api/v1/stats/aggregate?site_id=${
       siteId
@@ -40,4 +45,5 @@ export async function getMetrics(siteId: string, period: string): Promise<Metric
     });
   console.log(response);
   return response && response;
+  
 }

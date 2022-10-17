@@ -37,14 +37,8 @@ const statsData = [
   },
 ];
 function Dashboard({}: Props) {
-  const theme = useMantineTheme();
-  const [site, setSite] = React.useState<string>('jmwalsh.dev'!);
-  const [period, setPeriod] = React.useState<string>('day'!);
-
-function handleUpdate(updateFn: (Dispatch<SetStateAction<string>>), value: string) {
-  updateFn(value);
-  queryClient.invalidateQueries(['metrics', site, period])
-}
+  
+  
 
   return (
     <Paper
@@ -56,38 +50,9 @@ function handleUpdate(updateFn: (Dispatch<SetStateAction<string>>), value: strin
         flexDirection: "column",
       }}
     >
-      <Group position="apart" mb={"lg"} sx={{
-        padding: "1rem",
-        border: `3px solid ${theme.colors.primary[3]}`
-      }}>
-        <Title>Dashboard</Title>
-      <Select
-      label="Site"
-      defaultValue={'jmwalsh.dev'}
-      width={200}
-      data={[
-        { value: 'jmwalsh.dev', label: 'Portfolio' },
-        { value: 'cryptones.vercel.app', label: 'crypTones' },
-      ]}
-      onChange={(value) => handleUpdate(setSite, value!)}
-      />
-      <Select
-      label="Time period"
-      defaultValue={'day'}
-      width={200}
-      data={[
-        { value: 'day', label: 'Today' },
-        { value: '7d', label: '7 days' },
-        { value: '30d', label: '30 days' },
-        { value: 'month', label: 'Current Month' },
-      ]}
-      onChange={(value) => handleUpdate(setPeriod, value!)}
-      />
-   
-      </Group>
-
+      
       <Suspense fallback={<Loader />}>
-        { <DashStats site={site} period={period} />}
+        { <DashStats />}
       </Suspense>
 
       <Paper p={".5rem"}>
