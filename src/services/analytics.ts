@@ -22,6 +22,7 @@ export interface MetricsResponse extends Response {
 export async function getMetrics(siteId: string | null, period: string | null): Promise<Metrics> {
 
   if (!siteId || !period) {
+    console.log(siteId, period);
     return Promise.reject("Missing siteId or period");
   }
 

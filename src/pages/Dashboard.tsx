@@ -37,7 +37,9 @@ const statsData = [
   },
 ];
 function Dashboard({}: Props) {
-  
+  const [site, setSite] = React.useState<string | null>('jmwalsh.dev');
+  const [period, setPeriod] = React.useState<string | null>('day');
+  const theme = useMantineTheme();
   
 
   return (
@@ -50,9 +52,37 @@ function Dashboard({}: Props) {
         flexDirection: "column",
       }}
     >
-      
+      <Group position="apart" mb={"lg"} sx={{
+        padding: "1rem",
+        border: `3px solid ${theme.colors.primary[3]}`
+      }}>
+        <Title>{site}</Title>
+      <Select
+      label="Site"
+      value={site}
+      width={200}
+      data={[
+        { value: 'jmwalsh.dev', label: 'Portfolio' },
+        { value: 'cryptones.vercel.app', label: 'crypTones' },
+      ]}
+      onChange={setSite}
+      />
+      <Select
+      label="Time period"
+      value={period}
+      width={200}
+      data={[
+        { value: 'day', label: 'Today' },
+        { value: '7d', label: '7 days' },
+        { value: '30d', label: '30 days' },
+        { value: 'month', label: 'Current Month' },
+      ]}
+      onChange={setPeriod}
+      />
+   
+      </Group>
       <Suspense fallback={<Loader />}>
-        { <DashStats />}
+        { <DashStats site={site!} period={period!}/>}
       </Suspense>
 
       <Paper p={".5rem"}>

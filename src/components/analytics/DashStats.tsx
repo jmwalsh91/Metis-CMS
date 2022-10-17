@@ -60,47 +60,19 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+type Props = {
+  site: string
+  period: string
+}
 
-export function DashStats() {
-  const [site, setSite] = React.useState<string | null>('jmwalsh.dev');
-  const [period, setPeriod] = React.useState<string | null>('day');
+export function DashStats({site, period}: Props) {
   const { classes } = useStyles();
-  const theme = useMantineTheme();
   const { data, error } = useQuery<Metrics, Error>(["metrics", site, period], () =>
   getMetrics(site, period)
 );
 
   return (
     <>
-    <Group position="apart" mb={"lg"} sx={{
-        padding: "1rem",
-        border: `3px solid ${theme.colors.primary[3]}`
-      }}>
-        <Title>{site}</Title>
-      <Select
-      label="Site"
-      value={site}
-      width={200}
-      data={[
-        { value: 'jmwalsh.dev', label: 'Portfolio' },
-        { value: 'cryptones.vercel.app', label: 'crypTones' },
-      ]}
-      onChange={setSite}
-      />
-      <Select
-      label="Time period"
-      value={period}
-      width={200}
-      data={[
-        { value: 'day', label: 'Today' },
-        { value: '7d', label: '7 days' },
-        { value: '30d', label: '30 days' },
-        { value: 'month', label: 'Current Month' },
-      ]}
-      onChange={setPeriod}
-      />
-   
-      </Group>
 
     <div className={classes.root}>
 
