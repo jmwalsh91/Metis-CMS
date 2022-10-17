@@ -19,10 +19,10 @@ export interface MetricsResponse extends Response {
   results: Metrics;
 }
 
-export async function getMetrics(period: string): Promise<Metrics> {
+export async function getMetrics(siteId: string, period: string): Promise<Metrics> {
   const response = await fetch(
     `https://plausible.io/api/v1/stats/aggregate?site_id=${
-      import.meta.env.VITE_SITE_1
+      siteId
     }&period=${period}&metrics=visitors,pageviews,bounce_rate,visit_duration`,
     {
       headers: {

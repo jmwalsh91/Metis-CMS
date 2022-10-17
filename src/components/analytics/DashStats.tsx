@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { createStyles, Loader, Text } from '@mantine/core';
+import { createStyles, Loader, Select, Text } from '@mantine/core';
 import { getMetrics, Metrics } from '@/services/analytics';
 import { useQuery } from '@tanstack/react-query';
 
@@ -59,17 +59,22 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface StatsGroupProps {
-  data: Metrics
-}
+type Props = {
+site: string,
+period: string}
 
-export function DashStats() {
+export function DashStats({site, period}: Props ) {
   const { classes } = useStyles();
-  const { data, error } = useQuery<Metrics, Error>(["metrics"], () =>
-    getMetrics("6mo")
+  const { data, error } = useQuery<Metrics, Error>(["metrics", site, period], () =>
+    getMetrics(site, period)
   );
+
+/* function handleSiteChange(e: React.ChangeEvent<HTMLSelectElement>) { */
+
   return (
     <div className={classes.root}>
+
+
     <div key="bounce" className={classes.stat}>
       <Suspense fallback={<Loader />}>
       <Text className={classes.count}>{data && data.bounce_rate.value}%</Text>
