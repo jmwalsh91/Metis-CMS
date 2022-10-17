@@ -1,7 +1,8 @@
-import React, { Suspense } from 'react';
-import { createStyles, Loader, Text } from '@mantine/core';
+import React, { Dispatch, SetStateAction, Suspense } from 'react';
+import { Button, createStyles, Group, Loader, Select, Text, Title, useMantineTheme } from '@mantine/core';
 import { getMetrics, Metrics } from '@/services/analytics';
 import { useQuery } from '@tanstack/react-query';
+import { queryClient } from '@/services/queryClient';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -59,17 +60,23 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface StatsGroupProps {
-  data: Metrics
+type Props = {
+  site: string
+  period: string
 }
 
-export function DashStats() {
+export function DashStats({site, period}: Props) {
   const { classes } = useStyles();
-  const { data, error } = useQuery<Metrics, Error>(["metrics"], () =>
-    getMetrics("6mo")
-  );
+  const { data, error } = useQuery<Metrics, Error>(["metrics", site, period], () =>
+  getMetrics(site, period)
+);
+
   return (
+    <>
+
     <div className={classes.root}>
+
+
     <div key="bounce" className={classes.stat}>
       <Suspense fallback={<Loader />}>
       <Text className={classes.count}>{data && data.bounce_rate.value}%</Text>
@@ -101,5 +108,6 @@ export function DashStats() {
 {/*          <Text className={classes.description}></Text> */}
        </div>
     </div>
+    </>
 )
 }
