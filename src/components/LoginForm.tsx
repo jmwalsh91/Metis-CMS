@@ -83,7 +83,7 @@ const [checking, setChecking] = useState<boolean>(false)
             message: "We're in!",
             color: "success"
           })
-          navigate('dash')
+          navigate('/dash')
         }
       } 
 

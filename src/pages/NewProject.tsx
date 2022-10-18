@@ -131,14 +131,14 @@ function NewProject() {
         <Grid.Col span={6}>
           <MultiSelect
             data={stackOptions}
-            label="stack"
+            label="Stack"
             placeholder="What stack?"
             {...form.getInputProps("stack_badges")}
             />
         </Grid.Col>
 
         <Grid.Col span={6}>
-          <Title order={3}>Card Image</Title>
+          <Text size="sm" weight="600" >Project Image</Text>
           <FileUpload sx={{
         height: "200px"  
         }}
@@ -147,8 +147,12 @@ function NewProject() {
 
         <Grid.Col span={6}>
           <Textarea
-            size="xl"
+            
+            sx={{
+              height: "200px"  
+              }}
             label="Card Description"
+            labelStyle={{  }}
             minRows={8}
             {...form.getInputProps("card_text")}
             />
