@@ -10,6 +10,7 @@ import {
   Title,
   ScrollArea,
 } from "@mantine/core";
+import { FileWithPath } from "@mantine/dropzone";
 /* import { Dropzone } from "@mantine/dropzone"; */
 import { useForm, UseFormReturnType } from "@mantine/form";
 import RichTextEditor from "@mantine/rte";
@@ -138,7 +139,8 @@ function NewProject() {
         </Grid.Col>
 
         <Grid.Col span={6}>
-          <FileUpload onDrop={(files) => handleDrop(files)} />
+          <Title order={3}>Card Image</Title>
+          <FileUpload onDrop={(files: File[]) => handleDrop(files)} />
         </Grid.Col>
 
         <Grid.Col span={6}>
@@ -158,7 +160,7 @@ function NewProject() {
             {...form.getInputProps("description")}
             />
           <Title order={2}>Rich Text</Title>
-      <RichTextEditor
+{/*       <RichTextEditor
         value={value}
         label="Rich Text"
         sx={{
@@ -167,7 +169,7 @@ function NewProject() {
         }}
         onChange={onChange}
         {...form.getInputProps("rich_text")}
-        />
+        /> */}
       <Button onClick={() => handlePreview()}>Preview</Button>
       <Modal
         opened={open}
