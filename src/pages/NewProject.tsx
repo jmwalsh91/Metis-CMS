@@ -74,11 +74,11 @@ function NewProject() {
 
   const form = useForm<FormValues>({
     initialValues: {
-      project_name: "projectName",
-      card_text: "click to see more",
+      project_name: "",
+      card_text: "",
       card_image:
         "",
-      description: "projectDescription",
+      description: "",
       stack_badges: [""],
       mockup:
         "https://images.unsplash.com/photo-1621237023000-6a628c285938?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
@@ -114,8 +114,7 @@ function NewProject() {
   return (
       
       <Container fluid sx={{
-        height: "90vh",
-          marginBottom: "5rem",
+        display: "flex",
         }}>
           <ScrollArea hidden={false}>
       <Grid>
@@ -140,7 +139,10 @@ function NewProject() {
 
         <Grid.Col span={6}>
           <Title order={3}>Card Image</Title>
-          <FileUpload onDrop={(files: File[]) => handleDrop(files)} />
+          <FileUpload sx={{
+        height: "200px"  
+        }}
+          onDrop={(files: File[]) => handleDrop(files)} />
         </Grid.Col>
 
         <Grid.Col span={6}>
@@ -159,8 +161,8 @@ function NewProject() {
             mb="md"
             {...form.getInputProps("description")}
             />
-          <Title order={2}>Rich Text</Title>
-{/*       <RichTextEditor
+          {/* <Title order={2}>Rich Text</Title>
+      <RichTextEditor
         value={value}
         label="Rich Text"
         sx={{
@@ -169,7 +171,7 @@ function NewProject() {
         }}
         onChange={onChange}
         {...form.getInputProps("rich_text")}
-        /> */}
+        />  */}
       <Button onClick={() => handlePreview()}>Preview</Button>
       <Modal
         opened={open}
