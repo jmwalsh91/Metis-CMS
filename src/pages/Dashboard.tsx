@@ -19,23 +19,7 @@ import React, { Dispatch, SetStateAction, Suspense } from "react";
 import { DashStats } from "../components/analytics/DashStats";
 
 type Props = {};
-const statsData = [
-  {
-    title: "Unique Views",
-    stats: "1000",
-    description: "This is how many unique views, congrats!",
-  },
-  {
-    title: "Posts this week",
-    stats: "7",
-    description: "Up 700% from last week!",
-  },
-  {
-    title: "Another Metric",
-    stats: "Number",
-    description: "Another Metric Description would go here.",
-  },
-];
+
 function Dashboard({}: Props) {
   const [site, setSite] = React.useState<string | null>('jmwalsh.dev');
   const [period, setPeriod] = React.useState<string | null>('day');
@@ -94,11 +78,17 @@ function Dashboard({}: Props) {
             fontSize: "2rem",
           }}
         >
-          {" "}
-          Recent Posts
+        
+          {site === "jmwalsh.dev" ? "Recent Posts" : "Nothing configured."}
         </Text>
+          {" "}
+
+          Recent Posts
+        
       </Paper>
-      <Card
+      {site === "jmwalsh.dev" && <Text>No posts to display</Text>
+ /* TODO: Add recent posts from supabase        
+<Card
         style={{
           width: "25rem",
           height: "20rem",
@@ -109,7 +99,8 @@ function Dashboard({}: Props) {
         </Title>
         <CardSection>This is a recent post</CardSection>
         <Button>Expand</Button>
-      </Card>
+      </Card> */
+}
     </Paper>
   );
 }

@@ -1,3 +1,4 @@
+import { stackOptions } from "@/constants/stackOptions";
 import {
   Button,
   Container,
@@ -37,28 +38,6 @@ import { Project, sb, UploadImageResponse } from "../services/sb";
 const initialValue =
   "<p>Your initial <b>html value</b> or an empty string to init editor without value</p>";
 
-const stackOptions = [
-  { value: "Javascript", label: "Javascript" },
-  { value: "React", label: "React" },
-  { value: "Typescript", label: "Typescript" },
-  { value: "Storybook", label: "Storybook" },
-  { value: "Remix", label: "Remix" },
-  { value: "Vercel", label: "Vercel" },
-  { value: "React Query", label: "React Query" },
-  { value: "SWR", label: "SWR" },
-  { value: "MUI", label: "MUI" },
-  { value: "Chrome MV3", label: "Chrome MV3" },
-  { value: "Mantine", label: "Mantine" },
-  { value: "Tailwind", label: "Tailwind" },
-  { value: "Node", label: "Node" },
-  { value: "Express", label: "Express" },
-  { value: "MongoDB", label: "MongoDB" },
-  { value: "Mongoose", label: "Mongoose" },
-  { value: "MongoDB Atlas", label: "MongoDB Atlas" },
-  { value: "Supabase", label: "Supabase" },
-  { value: "Docker", label: "Docker" },
-  { value: "Azure", label: "Azure" },
-];
 
 function NewProject() {
   const [value, onChange] = useState<string>(initialValue);
@@ -184,7 +163,15 @@ function NewProject() {
         size="80%"
         >
         <PreviewProjectModal form={form}/>
-        <Button color="accent" onClick={() => handleSubmitPost(form)}>Submit</Button>
+        {/* TODO: Is this a good idea?
+        <TextInput
+            placeholder="Video URL"
+            label="Video"
+            
+            onChange={(e) => form.setFieldValue("video_url", e.currentTarget.value)}
+            {...form.getInputProps("video_url")}
+            /> */}
+        <Button color="accent" sx={{paddingBottom: "5rem"}} onClick={() => handleSubmitPost(form)}>Submit</Button>
       </Modal>
           </ScrollArea>
     </Container>

@@ -1,4 +1,4 @@
-import { Group } from '@mantine/core'
+import { Container, Group } from '@mantine/core'
 import React from 'react'
 import { theme } from '../styles/theme'
 import TargetsForCompose from './targets/TargetsForCompose'
@@ -43,7 +43,7 @@ type Props = {}
  */
 function ComposeTarget({}: Props) {
   return (
-    <>
+    <Container fluid sx={{minHeight: "80vh"}}>
     <Group position={'apart'} spacing={12} m={30}>
         {targetArr.map((target) => {
             return (
@@ -55,7 +55,7 @@ function ComposeTarget({}: Props) {
         </Link>
         )})}
   </Group>
-        </>
+        </Container>
   )
 }
 

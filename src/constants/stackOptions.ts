@@ -7,7 +7,7 @@ export const stackOptions = [
     { value: "Vercel", label: "Vercel" },
     { value: "React Query", label: "React Query" },
     { value: "SWR", label: "SWR" },
-    { value: "MUI", label: "MUI" },
+    { value: "MUI", label: "MUI" }, 
     { value: "Chrome MV3", label: "Chrome MV3" },
     { value: "Mantine", label: "Mantine" },
     { value: "Tailwind", label: "Tailwind" },
