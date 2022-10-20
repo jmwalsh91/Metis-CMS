@@ -14,7 +14,7 @@ const authUser = useContext(AuthContext)
     fixed={false}
 
       
-      header={<Header height="2.5rem" style={{display: 'flex', flexDirection: 'row'}} p="xs"><Title order={2} pb="1rem">
+      header={<Header height="4rem" style={{display: 'flex', flexDirection: 'row'}} p="xs"><Title order={2} pb="1rem">
         BlogCMS 
         </Title>
       {authUser.user? <NavItems/> : <Text>Please sign in</Text>}</Header>}

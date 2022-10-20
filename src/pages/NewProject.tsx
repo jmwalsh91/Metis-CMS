@@ -1,3 +1,4 @@
+import { stackOptions } from "@/constants/stackOptions";
 import {
   Button,
   Container,
@@ -10,6 +11,7 @@ import {
   Title,
   ScrollArea,
 } from "@mantine/core";
+import { FileWithPath } from "@mantine/dropzone";
 /* import { Dropzone } from "@mantine/dropzone"; */
 import { useForm, UseFormReturnType } from "@mantine/form";
 import RichTextEditor from "@mantine/rte";
@@ -36,28 +38,6 @@ import { Project, sb, UploadImageResponse } from "../services/sb";
 const initialValue =
   "<p>Your initial <b>html value</b> or an empty string to init editor without value</p>";
 
-const stackOptions = [
-  { value: "Javascript", label: "Javascript" },
-  { value: "React", label: "React" },
-  { value: "Typescript", label: "Typescript" },
-  { value: "Storybook", label: "Storybook" },
-  { value: "Remix", label: "Remix" },
-  { value: "Vercel", label: "Vercel" },
-  { value: "React Query", label: "React Query" },
-  { value: "SWR", label: "SWR" },
-  { value: "MUI", label: "MUI" },
-  { value: "Chrome MV3", label: "Chrome MV3" },
-  { value: "Mantine", label: "Mantine" },
-  { value: "Tailwind", label: "Tailwind" },
-  { value: "Node", label: "Node" },
-  { value: "Express", label: "Express" },
-  { value: "MongoDB", label: "MongoDB" },
-  { value: "Mongoose", label: "Mongoose" },
-  { value: "MongoDB Atlas", label: "MongoDB Atlas" },
-  { value: "Supabase", label: "Supabase" },
-  { value: "Docker", label: "Docker" },
-  { value: "Azure", label: "Azure" },
-];
 
 function NewProject() {
   const [value, onChange] = useState<string>(initialValue);
@@ -73,11 +53,11 @@ function NewProject() {
 
   const form = useForm<FormValues>({
     initialValues: {
-      project_name: "projectName",
-      card_text: "click to see more",
+      project_name: "",
+      card_text: "",
       card_image:
         "",
-      description: "projectDescription",
+      description: "",
       stack_badges: [""],
       mockup:
         "https://images.unsplash.com/photo-1621237023000-6a628c285938?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
@@ -113,8 +93,7 @@ function NewProject() {
   return (
       
       <Container fluid sx={{
-        height: "90vh",
-          marginBottom: "5rem",
+        display: "flex",
         }}>
           <ScrollArea hidden={false}>
       <Grid>
@@ -131,20 +110,28 @@ function NewProject() {
         <Grid.Col span={6}>
           <MultiSelect
             data={stackOptions}
-            label="stack"
+            label="Stack"
             placeholder="What stack?"
             {...form.getInputProps("stack_badges")}
             />
         </Grid.Col>
 
         <Grid.Col span={6}>
-          <FileUpload onDrop={(files) => handleDrop(files)} />
+          <Text size="sm" weight="600" >Project Image</Text>
+          <FileUpload sx={{
+        height: "200px"  
+        }}
+          onDrop={(files: File[]) => handleDrop(files)} />
         </Grid.Col>
 
         <Grid.Col span={6}>
           <Textarea
-            size="xl"
+            
+            sx={{
+              height: "200px"  
+              }}
             label="Card Description"
+            labelStyle={{  }}
             minRows={8}
             {...form.getInputProps("card_text")}
             />
@@ -157,7 +144,7 @@ function NewProject() {
             mb="md"
             {...form.getInputProps("description")}
             />
-          <Title order={2}>Rich Text</Title>
+          {/* <Title order={2}>Rich Text</Title>
       <RichTextEditor
         value={value}
         label="Rich Text"
@@ -167,7 +154,7 @@ function NewProject() {
         }}
         onChange={onChange}
         {...form.getInputProps("rich_text")}
-        />
+        />  */}
       <Button onClick={() => handlePreview()}>Preview</Button>
       <Modal
         opened={open}
@@ -176,7 +163,15 @@ function NewProject() {
         size="80%"
         >
         <PreviewProjectModal form={form}/>
-        <Button color="accent" onClick={() => handleSubmitPost(form)}>Submit</Button>
+        {/* TODO: Is this a good idea?
+        <TextInput
+            placeholder="Video URL"
+            label="Video"
+            
+            onChange={(e) => form.setFieldValue("video_url", e.currentTarget.value)}
+            {...form.getInputProps("video_url")}
+            /> */}
+        <Button color="accent" sx={{paddingBottom: "5rem"}} onClick={() => handleSubmitPost(form)}>Submit</Button>
       </Modal>
           </ScrollArea>
     </Container>

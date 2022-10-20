@@ -9,7 +9,7 @@ interface navItem {
 
 export default function NavItems( ) {
     const theme = useMantineTheme()
-    const navOptions: navItem[] = [{text: 'Home', link: "/"}, {text: 'Dashboard', link: "/dash"}, {text: 'Compose', link: "/compose"}, {text: 'View', link: '/view'}]
+    const navOptions: navItem[] = [/* {text: 'Home', link: "/"}, */ {text: 'Dashboard', link: "/dash"}, {text: 'Compose', link: "/compose"}, {text: 'View', link: '/view'}]
 
     const navItems: any = navOptions.map((item: navItem) => {
         return (

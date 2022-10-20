@@ -6,7 +6,7 @@
   "description": "Personal CMS, analytics desktop application",
   "author": "Jordan Walsh",
   "license": "MIT",
-  "main": "dist-electron/main/index.js",
+  "main": "dist-electron/electron/main/index.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder"

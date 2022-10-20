@@ -98,7 +98,7 @@ function Compose() {
       />
       <Grid>
         <Grid.Col span={6}>
-          <FileUpload onDrop={(files) => handleDrop(files)}/>
+          <FileUpload onDrop={(files: File[]) => handleDrop(files)}/>
         </Grid.Col>
         <Grid.Col span={6}>
           <Textarea
